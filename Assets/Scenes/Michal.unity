@@ -1022,10 +1022,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 390759317770697356, guid: 312b9232cd910df48b880959b992e843, type: 3}
+      propertyPath: size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398471722083240883, guid: 312b9232cd910df48b880959b992e843, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398471722083240883, guid: 312b9232cd910df48b880959b992e843, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7398471722338354357, guid: 312b9232cd910df48b880959b992e843, type: 3}
       propertyPath: hitProvider
       value: 
       objectReference: {fileID: 963194231}
+    - target: {fileID: 7398471722338354358, guid: 312b9232cd910df48b880959b992e843, type: 3}
+      propertyPath: tileSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398471722338354358, guid: 312b9232cd910df48b880959b992e843, type: 3}
+      propertyPath: tileSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7398471722338354359, guid: 312b9232cd910df48b880959b992e843, type: 3}
       propertyPath: m_RootOrder
       value: 8

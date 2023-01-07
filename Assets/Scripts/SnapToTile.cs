@@ -10,10 +10,11 @@ public class SnapToTile : MonoBehaviour
     private Vector2 gridSize;
     [SerializeField]
     private Vector2Int tileSize;
-    public Vector2Int size;
-
-    [SerializeField, ReadOnly]
-    private Vector2 gridPosition;
+    public Vector2Int TileSize
+    {
+        get => tileSize;
+        set => tileSize = value;
+    }
 
     private void LateUpdate()
     {
@@ -31,10 +32,10 @@ public class SnapToTile : MonoBehaviour
         bool isXEven = tileSize.x % 2 == 0;
         bool isYEven = tileSize.y % 2 == 0;
 
-        gridPosition.x = isXEven ? Mathf.RoundToInt(x - 0.5f) + 0.5f : Mathf.RoundToInt(x);
-        gridPosition.y = isYEven ? Mathf.RoundToInt(z - 0.5f) + 0.5f : Mathf.RoundToInt(z);
+        float newX = isXEven ? Mathf.RoundToInt(x - 0.5f) + 0.5f : Mathf.RoundToInt(x);
+        float newZ = isYEven ? Mathf.RoundToInt(z - 0.5f) + 0.5f : Mathf.RoundToInt(z);
 
-        return new Vector3(gridPosition.x, y, gridPosition.y);
+        return new Vector3(newX, y, newZ);
     }
 
     private void OnValidate()
