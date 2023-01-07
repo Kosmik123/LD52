@@ -19,7 +19,7 @@ public class FlatPosition : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayers = 1 << 8;
 
-    private void UpdatePosition()
+    public void UpdatePosition()
     {
         Vector3 rayStart = new Vector3(flatPosition.x, transform.position.y + 0.5f, flatPosition.y);
         if (Physics.Raycast(rayStart, Vector3.down, out var hitInfo, 1, groundLayers))
