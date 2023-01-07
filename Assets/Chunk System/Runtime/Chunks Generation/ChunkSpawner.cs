@@ -26,7 +26,13 @@ namespace Bipolar.ChunkSystem.Generation
 
         public Chunk GetChunk(int x, int y, int z)
         {
-            var newChunk = Instantiate(ChunksProvider.GetChunk(), chunksContainer);
+            var chunkTemplate = ChunksProvider.GetChunk();
+            if (chunkTemplate == null)
+                return null;
+
+            var newChunk = Instantiate(chunkTemplate, chunksContainer);
+            var index = chunksData.ValidateIndex(x, y, z);
+            newChunk.Init(chunksData.Settings, index);
 
             return newChunk;
         }

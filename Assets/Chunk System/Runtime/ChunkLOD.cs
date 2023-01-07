@@ -92,6 +92,7 @@ namespace Bipolar.ChunkSystem
                 chunk.Content.gameObject.SetActive(false);
                 replacementsMeshFilter.gameObject.SetActive(true);
                 replacementsMeshFilter.mesh = meshReplacements[i].mesh;
+                OnChunkLODRefreshed?.Invoke(distance);
                 return;
             }
             EnableContent();
@@ -108,6 +109,7 @@ namespace Bipolar.ChunkSystem
         {
             chunk.Content.gameObject.SetActive(false);
         }
+
 
         private void OnValidate()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 
 namespace Bipolar.ChunkSystem
@@ -25,9 +26,9 @@ namespace Bipolar.ChunkSystem
         public void Init(ChunksSettings settings)
         {
             Init(settings, new Vector3Int(
-                GetIndexComponent(transform.position.x, settings.ChunkSize.x),
-                GetIndexComponent(transform.position.y, settings.ChunkSize.y),
-                GetIndexComponent(transform.position.z, settings.ChunkSize.z)));
+                GetIndexComponent(transform.localPosition.x, settings.ChunkSize.x),
+                GetIndexComponent(transform.localPosition.y, settings.ChunkSize.y),
+                GetIndexComponent(transform.localPosition.z, settings.ChunkSize.z)));
         }
 
         private int GetIndexComponent(float positionComponent, float chunkSizeComponent)
@@ -42,13 +43,43 @@ namespace Bipolar.ChunkSystem
         {
             this.settings = settings;
             this.index = index;
+
+            gameObject.name = GetName();
             OnChunkInitialized?.Invoke();
         }
+
+        private string GetName()
+        {
+            bool hasX = settings.ChunkSize.x != 0;
+            bool hasY = settings.ChunkSize.y != 0;
+            bool hasZ = settings.ChunkSize.z != 0;
+
+            StringBuilder nameBuilder = new StringBuilder("Chunk (");
+            if (hasX)
+            {
+                nameBuilder.Append($"{index.x}");
+                if (hasY || hasZ)
+                    nameBuilder.Append(",");
+            }
+            if (hasY)
+            {
+                nameBuilder.Append($"{index.y}");
+                if (hasZ)
+                    nameBuilder.Append(",");
+            }
+            if (hasZ)
+            {
+                nameBuilder.Append($"{index.z}");
+            }
+            nameBuilder.Append(")");
+            return nameBuilder.ToString();
+        }
+
 
         public void RefreshPosition(Vector3Int shift)
         {
             var size = settings.ChunkSize;
-            transform.position = new Vector3(
+            transform.localPosition = new Vector3(
                 (index.x + shift.x) * size.x,
                 (index.y + shift.y) * size.y,
                 (index.z + shift.z) * size.z);
@@ -64,11 +95,11 @@ namespace Bipolar.ChunkSystem
                 chunksData = FindObjectOfType<ChunksData>();
             var size = chunksData.ChunkSize;
             index = new Vector3Int(
-                GetIndexComponent(transform.position.x, size.x),
-                GetIndexComponent(transform.position.y, size.y),
-                GetIndexComponent(transform.position.z, size.z));
+                GetIndexComponent(transform.localPosition.x, size.x),
+                GetIndexComponent(transform.localPosition.y, size.y),
+                GetIndexComponent(transform.localPosition.z, size.z));
 
-            transform.position = chunksData.IndexToPosition(index);
+            transform.localPosition = chunksData.IndexToPosition(index);
         }
 #endif
     }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Bipolar.ChunkSystem.Generation;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bipolar.ChunkSystem
 {
-    public class ChunksData : MonoBehaviour
+    public class ChunksData : MonoBehaviour, IChunkInstanceProvider
     {
         public event Action<Chunk> OnChunkAdded;
 
@@ -21,7 +22,7 @@ namespace Bipolar.ChunkSystem
         private List<Chunk> chunks = new List<Chunk>();
         private readonly Dictionary<Vector3Int, Chunk> chunksDictionary = new Dictionary<Vector3Int, Chunk>();
 
-        public Dictionary<Vector3Int, Chunk>.ValueCollection AllChunks => chunksDictionary.Values;
+        public IReadOnlyCollection<Chunk> AllChunks => chunksDictionary.Values;
 
         [SerializeField]
         private Vector3Int chunksShift;
@@ -34,7 +35,7 @@ namespace Bipolar.ChunkSystem
         private void Awake()
         {
             chunks.Clear();
-            var chunksInContainer = GetChunksFromContainer();
+            var chunksInContainer = container == null ? FindObjectsOfType<Chunk>() : container.GetComponentsInChildren<Chunk>();
             foreach (var chunk in chunksInContainer)
             {
                 //if (chunk.gameObject.activeInHierarchy)
@@ -43,22 +44,15 @@ namespace Bipolar.ChunkSystem
                     chunks.Add(chunk);
                 }
             }
+
             InitializeDictionary();
-        }
 
-        private Chunk[] GetChunksFromContainer()
-        {
-            if (container == null)
-                return FindObjectsOfType<Chunk>();
-
-            return container.GetComponentsInChildren<Chunk>();
-        }
-
-        private void InitializeDictionary()
-        {
-            chunksDictionary.Clear();
-            foreach (var chunk in chunks)
-                chunksDictionary[chunk.Index] = chunk;
+            void InitializeDictionary()
+            {
+                chunksDictionary.Clear();
+                foreach (var chunk in chunks)
+                    chunksDictionary[chunk.Index] = chunk;
+            }
         }
 
         public Vector3Int ValidateIndex(Vector3Int index)
@@ -97,12 +91,11 @@ namespace Bipolar.ChunkSystem
             var index = ValidateIndex(chunk.Index);
 
             chunksDictionary.Add(index, chunk);
-            chunks.Add(chunk);
+#if UNITY_EDITOR
+            if (chunks.Contains(chunk) == false)
+                chunks.Add(chunk);
+#endif            
             OnChunkAdded?.Invoke(chunk);
-        }
-
-        public void Init(ChunksData chunksManager)
-        {
         }
 
         public Chunk GetChunk(int x, int z)

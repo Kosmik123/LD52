@@ -10,5 +10,4 @@
     {
         Chunk GetChunk(int x, int y, int z);
     }
-
 }

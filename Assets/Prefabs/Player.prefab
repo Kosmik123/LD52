@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flat: {fileID: 6697646537019027701}
   forwardProvider: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 5
   inputProvider: {fileID: 6046578624257243661}
 --- !u!114 &6046578624257243661
 MonoBehaviour:

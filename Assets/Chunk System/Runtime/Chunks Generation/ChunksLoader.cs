@@ -5,10 +5,10 @@ namespace Bipolar.ChunkSystem.Generation
     [RequireComponent(typeof(ChunksData)), DisallowMultipleComponent]
     public class ChunksLoader : MonoBehaviour
     {
+        public event System.Action<Chunk> OnChunkLoaded;
+        
         [SerializeField]
         private ChunksData chunksData;
-
-        public event System.Action<Chunk> OnChunkLoaded;
 
         [SerializeField]
         private OnObserverChunkChangeListener listener;
@@ -66,19 +66,31 @@ namespace Bipolar.ChunkSystem.Generation
 
         private void GenerateMissingChunks(Vector3Int observerIndex)
         {
-            for (int z = observerIndex.z - indexCheckDistance; z <= observerIndex.z + indexCheckDistance; z++)
+            Vector3 chunkSize = chunksData.Settings.ChunkSize;
+            int xIndexCheckDistance = chunkSize.x == 0 ? 0 : indexCheckDistance;
+            int yIndexCheckDistance = chunkSize.y == 0 ? 0 : indexCheckDistance;
+            int zIndexCheckDistance = chunkSize.z == 0 ? 0 : indexCheckDistance;
+
+            int x, y, z;
+            for (int k = -zIndexCheckDistance; k <= zIndexCheckDistance; k++)
             {
-                for (int y = observerIndex.y - indexCheckDistance; y <= observerIndex.y + indexCheckDistance; y++)
+                for (int j = -yIndexCheckDistance; j <= yIndexCheckDistance; j++)
                 {
-                    for (int x = observerIndex.x - indexCheckDistance; x <= observerIndex.x + indexCheckDistance; x++)
+                    for (int i = -xIndexCheckDistance; i <= xIndexCheckDistance; i++)
                     {
+                        x = i + observerIndex.x;
+                        y = j + observerIndex.y;
+                        z = k + observerIndex.z;
+
                         if (chunksData.GetChunk(x, y, z) != null)
                             continue;
 
                         var newChunk = ChunkInstancesProvider.GetChunk(x, y, z);
-                        var index = chunksData.ValidateIndex(x, y, z);
-                        newChunk.Init(chunksData.Settings, index);
+                        if (newChunk == null)
+                            continue;
+
                         chunksData.AddChunk(newChunk);
+                        Debug.Log($"Adding missing chunk {newChunk.gameObject.name}");
                         newChunk.transform.localPosition = chunksData.IndexToPosition(new Vector3Int(x, y, z));
                         OnChunkLoaded?.Invoke(newChunk);
                     }

@@ -30,7 +30,9 @@ namespace Bipolar.RaycastSystem
 
         public void RayExit()
         {
-            onRayExit.Invoke();
+            if (onRayExit.GetPersistentEventCount() > 0)
+                onRayExit.Invoke();
+    
             OnRayExit?.Invoke();
         }
     }
