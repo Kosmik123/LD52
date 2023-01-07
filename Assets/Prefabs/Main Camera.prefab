@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2877397195062511850}
   - component: {fileID: 2877397195062511854}
   - component: {fileID: 2877397195062511853}
-  - component: {fileID: 2877397195062511855}
+  - component: {fileID: 6336544417572907635}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -135,7 +135,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0.5, z: 0}
   distance: 7
   angles: {x: 45, y: 45}
---- !u!114 &2877397195062511855
+--- !u!114 &6336544417572907635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,13 +144,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2877397195062511849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af06866b646eb954e9207ba2be3efcd4, type: 3}
+  m_Script: {fileID: 11500000, guid: a2860c90c4ffa8344bafd5872f24cf42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 2877397195062511851}
-  raycastedLayers:
+  rayLength: 30
+  detectedLayers:
     serializedVersion: 2
     m_Bits: 256
-  raycastDistance: 16
-  raycastMode: 1
-  currentTarget: {fileID: 0}
+  hitPosition: {x: 0, y: 0, z: 0}
