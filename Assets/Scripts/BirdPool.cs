@@ -16,8 +16,7 @@ public class BirdPool : MonoBehaviour
 
     public GameObject SpawnBirds()
     {
-        GameObject bird = birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
-        return bird;
+        return birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
     }
 
     private GameObject WithdrawElementOfList()
