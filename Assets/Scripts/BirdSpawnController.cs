@@ -6,7 +6,7 @@ using UnityEngine;
 public class BirdSpawnController : MonoBehaviour
 {
     [Header("To link")]
-    [SerializeField] private BirdPool birdPool;
+    [SerializeField] private BirdPool[] birdPools;
     [SerializeField] private Enemy[] birdPrefabs;
 
     [Header("Waves Time")]
@@ -25,7 +25,6 @@ public class BirdSpawnController : MonoBehaviour
     {
         float time = GetRandomTimeInterval();
         yield return new WaitForSeconds(time);
-        birdPool.SpawnBirds();
     }
 
     private void Update()
@@ -48,7 +47,6 @@ public class BirdSpawnController : MonoBehaviour
 
     private void SetPlaceToSpawnBird()
     {
-        transform.position = birdPool.transform.position;
     }
 
     private float GetRandomTimeInterval()
