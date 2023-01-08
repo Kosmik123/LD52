@@ -12,11 +12,6 @@ public class BirdSpawnController : MonoBehaviour
 
     private float spawnTimer;
 
-    private void Start()
-    {
-        StartCoroutine(nameof(GetBirdFromPool), 2f);
-    }
-
     private IEnumerator GetBirdFromPool()
     {
         float time = GetRandomTimeInterval();
