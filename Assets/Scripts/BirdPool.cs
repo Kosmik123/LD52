@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class BirdPool : MonoBehaviour
+public class BirdPool : MonoBehaviour
 {
     [SerializeField] public List<GameObject> birds;
     [SerializeField] private GameObject origin;
