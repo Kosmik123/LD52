@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitProvider: {fileID: 0}
+  snap: {fileID: 0}
 --- !u!114 &390759317770697356
 MonoBehaviour:
   m_ObjectHideFlags: 0

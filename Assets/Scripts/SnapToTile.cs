@@ -27,6 +27,11 @@ public class SnapToTile : MonoBehaviour
         transform.position = GetSnappedPosition(position.x, position.y, position.z);
     }
 
+    public Vector3 GetSnappedPosition(Vector3 position)
+    {
+        return GetSnappedPosition(position.x, position.y, position.z);
+    }
+
     public Vector3 GetSnappedPosition(float x, float y, float z)
     {
         bool isXEven = tileSize.x % 2 == 0;

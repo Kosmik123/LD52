@@ -1,21 +1,29 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private FlatPosition flat;
+    [Header("To Link")]
     [SerializeField]
     private CharacterController characterController;
 
     [SerializeField]
-    private Transform forwardProvider;
-
-    [SerializeField]
-    private float moveSpeed;
-
-    [SerializeField]
     private Object inputProvider;
     public IMoveInputProvider InputProvider => (IMoveInputProvider)inputProvider;
+    [SerializeField]
+    private Transform forwardProvider;
+
+    [Header("Settings")]
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
+    private float gravityScale;
+    
+    [Header("States")]
+    [SerializeField, ReadOnly]
+    private Vector3 velocity;
+    [SerializeField, ReadOnly]
+    private CollisionFlags collisionFlags;
 
     private void Update()
     {
@@ -25,16 +33,18 @@ public class PlayerMovement : MonoBehaviour
         right.y = 0;
 
         Vector3 motion = forward * InputProvider.GetVertical() + right * InputProvider.GetHorizontal();
-        characterController.Move(moveSpeed * Time.deltaTime * motion);
 
-        //Vector2 flatMove = new Vector2(motion.x, motion.z);
-        //flat.Position += moveSpeed * Time.deltaTime * flatMove;
+        velocity = moveSpeed * Time.deltaTime * motion;
+        ApplyGravity();
+        collisionFlags = characterController.Move(velocity);
     }
 
-
-    private void LateUpdate()
+    private void ApplyGravity()
     {
-       // flat.UpdatePosition();
+        if (characterController.isGrounded && velocity.y <= 0)
+            velocity.y = 0.5f * gravityScale * Physics.gravity.y;
+        else
+            velocity += gravityScale * Time.deltaTime * Physics.gravity;
     }
 
     private void OnValidate()

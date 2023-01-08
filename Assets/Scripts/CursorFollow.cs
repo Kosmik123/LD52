@@ -6,9 +6,11 @@ public class CursorFollow : MonoBehaviour
 {
     [SerializeField]
     private RaycastHitProvider hitProvider;
+    [SerializeField]
+    private SnapToTile snap;
 
     void Update()
     {
-        transform.position = hitProvider.Point;
+        transform.position = snap.GetSnappedPosition(hitProvider.Point);
     }
 }
