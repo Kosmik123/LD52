@@ -57,6 +57,13 @@ public class BirdSpawnController : MonoBehaviour
         int enemyPoints = Mathf.RoundToInt(difficulty);
     }
 
+    private int SpawnBird()
+    {
+        int randomPoolIndex = Random.Range(0, birdPools.Length);
+        var pool = birdPools[randomPoolIndex];
+        var bird = pool.SpawnBird();
+        return bird.Difficulty;
+    }
 
     private float GetRandomTimeInterval()
     {
