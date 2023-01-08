@@ -19,7 +19,8 @@ public class BirdSpawnController : MonoBehaviour
 
     private IEnumerator GetBirdFromPool()
     {
-        GetRandomTimeInterval();
+        float time = GetRandomTimeInterval();
+        yield return new WaitForSeconds(time);
         birdPool.SpawnBirds();
     }
 
