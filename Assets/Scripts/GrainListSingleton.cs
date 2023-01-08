@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrainListSingleton : MonoBehaviour
 {
     [SerializeField] private List<GameObject> grains = new List<GameObject>();
+    public List<GameObject> Grains => grains;
     public static GrainListSingleton Instance { get; private set; }
 
     private void Awake()
@@ -12,7 +13,7 @@ public class GrainListSingleton : MonoBehaviour
         if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
-        }    
+        }     
         else
         {
             Instance = this;
