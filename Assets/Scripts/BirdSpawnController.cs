@@ -17,7 +17,7 @@ public class BirdSpawnController : MonoBehaviour
         StartCoroutine(nameof(GetBirdFromPool), 2f);
     }
 
-    private void GetBirdFromPool()
+    private IEnumerator GetBirdFromPool()
     {
         GetRandomTimeInterval();
         birdPool.SpawnBirds();
