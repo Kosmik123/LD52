@@ -111,10 +111,8 @@ namespace BuildingSystem
             if (Input.GetKeyDown(KeyCode.Tab))
                 ToggleMode();
 
-
-
-            canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.45f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers);
-           
+            canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f),
+                0.4f * new Vector3(cursor.Size.x, 1, cursor.Size.y), Quaternion.AngleAxis(cursor.Angle, Vector3.up), collidingLayers);
             if (destroyingMode)
                 HandleDestroying();
             else
