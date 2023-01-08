@@ -14,6 +14,10 @@ public class BirdSpawnController : MonoBehaviour
     [SerializeField, ReadOnly]
     private float spawnTimer;
 
+    [SerializeField] private float difficultyModifier = 0.1f;
+    [SerializeField, ReadOnly]
+    private float difficulty;
+
     private IEnumerator GetBirdFromPool()
     {
         float time = GetRandomTimeInterval();
