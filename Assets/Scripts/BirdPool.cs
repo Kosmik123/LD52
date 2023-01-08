@@ -18,13 +18,10 @@ public class BirdPool : MonoBehaviour
     {
         GameObject bird;
         if(birds.Count > 0)
-        {
             bird = WithdrawElementOfList();
-        }
         else
-        {
             bird = InstantiateBird();
-        }
+
         return bird;
     }
 
