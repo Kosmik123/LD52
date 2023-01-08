@@ -29,7 +29,10 @@ public class BirdSpawnController : MonoBehaviour
 
     private BirdPool CreatePoolForBirdType(Enemy bird)
     {
-
+        var poolGO = new GameObject($"Pool {bird.gameObject.name}");
+        var pool = poolGO.AddComponent<BirdPool>();
+        pool.BirdPrefab = bird;
+        return pool;
     }
 
     private void Update()
