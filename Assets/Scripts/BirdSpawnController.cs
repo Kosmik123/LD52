@@ -14,7 +14,7 @@ public class BirdSpawnController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("GetBirdFromPool",2f);
+        StartCoroutine(nameof(GetBirdFromPool), 2f);
     }
 
     private void GetBirdFromPool()
