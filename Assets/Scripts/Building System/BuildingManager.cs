@@ -108,6 +108,10 @@ namespace BuildingSystem
 
         private void Update()
         {
+            float scroll = Input.mouseScrollDelta.y;
+            if (scroll != 0)
+                CurrentBuildingIndex += Mathf.RoundToInt(scroll);
+
             canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.45f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers);
             HandleBuilding();
         }
