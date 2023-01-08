@@ -19,7 +19,7 @@ public class BirdSpawnController : MonoBehaviour
 
     private void GetBirdFromPool()
     {
-        SetRandomTimeInterval();
+        GetRandomTimeInterval();
         birdPool.SpawnBirds();
     }
 
@@ -28,9 +28,9 @@ public class BirdSpawnController : MonoBehaviour
         transform.position = birdPool.transform.position;
     }
 
-    private float SetRandomTimeInterval()
+    private float GetRandomTimeInterval()
     {
-        spawnTimer = Random.Range(minRandomSpawnTimeValue, maxRandomSpawnTimeValue);
+        float spawnTimer = Random.Range(minRandomSpawnTimeValue, maxRandomSpawnTimeValue);
         return spawnTimer;
     }
 }
