@@ -27,6 +27,11 @@ public class BirdSpawnController : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
+    private void Awake()
+    {
+        birdPools = new BirdPool[birdPrefabs.Length];
+    }
+
     private BirdPool CreatePoolForBirdType(Enemy bird)
     {
         var poolGO = new GameObject($"Pool {bird.gameObject.name}");
