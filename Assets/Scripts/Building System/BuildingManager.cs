@@ -6,16 +6,13 @@ using UnityEngine;
 
 namespace BuildingSystem
 {
-
     public class BuildingManager : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField]
         private BuildingSettings settings;
-
         [SerializeField]
         private BuildingVisual[] visualPrefabs;
-
         [SerializeField]
         private CursorController cursor;
 
@@ -49,6 +46,9 @@ namespace BuildingSystem
 
         [SerializeField, ReadOnly]
         private bool canBuild;
+
+        [SerializeField, ReadOnly]
+        private bool destroyingMode;
 
         private void Awake()
         {
@@ -108,12 +108,46 @@ namespace BuildingSystem
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Tab))
+                ToggleMode();
+
+
             float scroll = Input.mouseScrollDelta.y;
             if (scroll != 0)
                 CurrentBuildingIndex += Mathf.RoundToInt(scroll);
 
             canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.45f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers);
-            HandleBuilding();
+           
+            if (destroyingMode)
+                HandleDestroying();
+            else
+                HandleBuilding();
+        }
+
+        private void ToggleMode()
+        {
+            destroyingMode = !destroyingMode;
+            cursor.SetColor(destroyingMode ? Color.red : Color.white);
+            for (int i = 0; i < cursorTemplates.Length; i++)
+                cursorTemplates[i].gameObject.SetActive(destroyingMode == false && currentBuildingIndex == i);
+        }
+
+        private void HandleDestroying()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hitInfo, 40, collidingLayers))
+                {
+                    var collider = hitInfo.collider;
+                    if (collider == null)
+                        return;
+
+                    var targettedBuilding = collider.GetComponentInParent<Building>();
+                    if (targettedBuilding != null)
+                        DestroyBuilding(targettedBuilding);
+                }
+            }    
         }
 
         private void HandleBuilding()
@@ -139,5 +173,12 @@ namespace BuildingSystem
             building.transform.parent = buildingsContainer;
             buildings.Add(building);
         }
+
+        private void DestroyBuilding(Building building)
+        {
+            RemoveFromList(building);
+            Destroy(building.gameObject);
+        }
+
     }
 }

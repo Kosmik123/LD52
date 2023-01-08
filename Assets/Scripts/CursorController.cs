@@ -53,4 +53,9 @@ public class CursorController : MonoBehaviour
     {
         Size = Size;
     }
+
+    public void SetColor(Color color)
+    {
+        spriteRenderer.color = color;
+    }
 }
