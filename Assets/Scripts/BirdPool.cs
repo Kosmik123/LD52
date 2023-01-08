@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class BirdPool : MonoBehaviour
 {
-    [SerializeField] private GameObject birdPrefab;
+    [SerializeField] private Enemy birdPrefab;
 
-    [SerializeField] public List<GameObject> birds;
+    [SerializeField] public List<Enemy> birds;
     [SerializeField] private GameObject origin;
     [SerializeField] private int maxObjects = 5;
 
     private void Start()
     {
-        birds = new List<GameObject>();
+        birds = new List<Enemy>();
     }
 
-    public GameObject SpawnBirds()
+    public Enemy SpawnBirds()
     {
         return birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
     }
 
-    private GameObject WithdrawElementOfList()
+    private Enemy WithdrawElementOfList()
     {
         int firstElementOfList = 0;
-        GameObject currentBird = birds[firstElementOfList];
+        Enemy currentBird = birds[firstElementOfList];
         currentBird.transform.position = origin.transform.position;
         return currentBird;
     }
 
-    private GameObject InstantiateBird()
+    private Enemy InstantiateBird()
     {
-        GameObject currentBird = Instantiate(birdPrefab, origin.transform.position, Quaternion.identity);
+        Enemy currentBird = Instantiate(birdPrefab, origin.transform.position, Quaternion.identity);
         return currentBird;
     }    
 }
