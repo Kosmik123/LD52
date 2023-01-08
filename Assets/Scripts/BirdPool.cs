@@ -19,8 +19,9 @@ public class BirdPool : MonoBehaviour
         set => origin = value;
     }
 
+    [SerializeField] private float spawnDistance;
+    public float SpawnDistance { get => spawnDistance; set => spawnDistance = value; }
 
-    [SerializeField] float spawnDistance;
     
     public Enemy SpawnBird()
     {
