@@ -111,7 +111,6 @@ namespace BuildingSystem
             if (Input.GetKeyDown(KeyCode.Tab))
                 ToggleMode();
 
-
             float scroll = Input.mouseScrollDelta.y;
             if (scroll != 0)
                 CurrentBuildingIndex += Mathf.RoundToInt(scroll);
