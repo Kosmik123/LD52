@@ -21,12 +21,6 @@ public class BirdSpawnController : MonoBehaviour
     [SerializeField, ReadOnly]
     private float difficulty;
 
-    private IEnumerator GetBirdFromPool()
-    {
-        float time = GetRandomTimeInterval();
-        yield return new WaitForSeconds(time);
-    }
-
     private void Awake()
     {
         birdPools = new BirdPool[birdPrefabs.Length];
@@ -63,9 +57,6 @@ public class BirdSpawnController : MonoBehaviour
         int enemyPoints = Mathf.RoundToInt(difficulty);
     }
 
-    private void SetPlaceToSpawnBird()
-    {
-    }
 
     private float GetRandomTimeInterval()
     {
