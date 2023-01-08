@@ -12,8 +12,8 @@ public class BirdPool : MonoBehaviour
     }
 
     [SerializeField] public List<Enemy> birds = new List<Enemy>();
-    [SerializeField] private GameObject origin;
-    public GameObject Origin 
+    [SerializeField] private Transform origin;
+    public Transform Origin 
     { 
         get => origin;
         set => origin = value;
