@@ -30,7 +30,6 @@ public class BirdPool : MonoBehaviour
     private GameObject InstantiateBird()
     {
         GameObject currentBird = Instantiate(bird, origin.transform.position, Quaternion.identity);
-        currentBird.transform.position = origin.transform.position;
         return currentBird;
     }    
 }
