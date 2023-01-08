@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: fe13bc7448b6f1f4e9d1ae6d9607c764, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4508214, g: 0.5007417, b: 0.57469386, a: 1}
+  m_IndirectSpecularColor: {r: 0.43328646, g: 0.59866124, b: 0.4661762, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -315,7 +315,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -550,6 +550,7 @@ MonoBehaviour:
   currentlyHeldBuilding: {fileID: 0}
   buildings: []
   canBuild: 0
+  destroyingMode: 0
 --- !u!114 &1252557732 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 390759317770697356, guid: 312b9232cd910df48b880959b992e843, type: 3}
@@ -602,63 +603,6 @@ Transform:
   m_Father: {fileID: 1119227667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2140103293
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 891361588568515813, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583649527074431060, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
-      propertyPath: m_Name
-      value: Hay Bale
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9651b3674811cb64f92a577f05027e18, type: 3}
 --- !u!1001 &684300705342526283
 PrefabInstance:
   m_ObjectHideFlags: 0
