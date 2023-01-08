@@ -12,5 +12,6 @@ public class CursorFollow : MonoBehaviour
     void Update()
     {
         transform.position = snap.GetSnappedPosition(hitProvider.Point);
+
     }
 }

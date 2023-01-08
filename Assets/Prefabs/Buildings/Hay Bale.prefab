@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1171371379169002155, guid: c420719b3ab7f814692595b79e505c45, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1239349134248615263, guid: c420719b3ab7f814692595b79e505c45, type: 3}
       propertyPath: m_Name
       value: Hay Bale
