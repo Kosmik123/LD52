@@ -7,7 +7,7 @@ public class BirdSpawnController : MonoBehaviour
 {
     [Header("To link")]
     [SerializeField] private BirdPool birdPool;
-    [SerializeField] private Enemy bird;
+    [SerializeField] private Enemy[] birdPrefabs;
 
     [Header("Waves Time")]
     [SerializeField] private float minRandomSpawnTimeValue;
