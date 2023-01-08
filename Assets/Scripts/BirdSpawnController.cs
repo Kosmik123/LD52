@@ -32,6 +32,8 @@ public class BirdSpawnController : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
         difficulty += deltaTime * difficultyModifier;
+
+        spawnTimer -= deltaTime;
     }
 
     private void SetPlaceToSpawnBird()
