@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class BirdSpawnController : MonoBehaviour
     [SerializeField] private float minRandomSpawnTimeValue;
     [SerializeField] private float maxRandomSpawnTimeValue;
 
+    [SerializeField, ReadOnly]
     private float spawnTimer;
 
     private IEnumerator GetBirdFromPool()
