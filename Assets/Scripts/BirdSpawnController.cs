@@ -36,12 +36,12 @@ public class BirdSpawnController : MonoBehaviour
         spawnTimer -= deltaTime;
         if (spawnTimer <= 0)
         {
-            DoSomething();
+            SpawnWave();
             spawnTimer = GetRandomTimeInterval(); // reset timer to random value
         }
     }
 
-    private void DoSomething()
+    private void SpawnWave()
     {
 
     }
