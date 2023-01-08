@@ -6,15 +6,10 @@ public class BirdPool : MonoBehaviour
 {
     [SerializeField] private Enemy birdPrefab;
 
-    [SerializeField] public List<Enemy> birds;
+    [SerializeField] public List<Enemy> birds = new List<Enemy>();
     [SerializeField] private GameObject origin;
     [SerializeField] private int maxObjects = 5;
-
-    private void Start()
-    {
-        birds = new List<Enemy>();
-    }
-
+    
     public Enemy SpawnBirds()
     {
         return birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
