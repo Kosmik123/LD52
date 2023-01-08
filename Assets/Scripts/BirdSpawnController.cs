@@ -34,13 +34,16 @@ public class BirdSpawnController : MonoBehaviour
         difficulty += deltaTime * difficultyModifier;
 
         spawnTimer -= deltaTime;
-        if (spawnTimer <= 0)             // after timer reached zero
+        if (spawnTimer <= 0)
         {
-            // do something
-
-            // and then
+            DoSomething();
             spawnTimer = GetRandomTimeInterval(); // reset timer to random value
         }
+    }
+
+    private void DoSomething()
+    {
+
     }
 
     private void SetPlaceToSpawnBird()
