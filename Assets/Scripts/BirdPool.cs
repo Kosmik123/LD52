@@ -39,7 +39,9 @@ public class BirdPool : MonoBehaviour
 
     private Enemy InstantiateBird()
     {
-        Enemy currentBird = Instantiate(birdPrefab, origin.transform.position, Quaternion.identity);
+        float randomAngle = Random.Range(-180, 180);
+        Vector3 randomPosition = Quaternion.AngleAxis(randomAngle, Vector3.up) * Vector3.forward * spawnDistance;
+        Enemy currentBird = Instantiate(birdPrefab, origin.position + randomPosition, Quaternion.identity);
         return currentBird;
     }    
 }
