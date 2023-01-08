@@ -14,7 +14,7 @@ public class BirdPool : MonoBehaviour
         birds = new List<GameObject>();
     }
 
-    public void SpawnBirds()
+    public GameObject SpawnBirds()
     {
         GameObject bird;
         if(birds.Count > 0)
@@ -25,6 +25,7 @@ public class BirdPool : MonoBehaviour
         {
             bird = InstantiateBird();
         }
+        return bird;
     }
 
     private GameObject WithdrawElementOfList()
