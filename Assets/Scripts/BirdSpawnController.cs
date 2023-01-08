@@ -28,6 +28,12 @@ public class BirdSpawnController : MonoBehaviour
         birdPool.SpawnBirds();
     }
 
+    private void Update()
+    {
+        float deltaTime = Time.deltaTime;
+        difficulty += deltaTime * difficultyModifier;
+    }
+
     private void SetPlaceToSpawnBird()
     {
         transform.position = birdPool.transform.position;
