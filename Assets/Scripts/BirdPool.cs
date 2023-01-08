@@ -21,8 +21,8 @@ public class BirdPool : MonoBehaviour
 
     private GameObject WithdrawElementOfList()
     {
-        int firstElementOFList = 0;
-        GameObject currentBird = birds[firstElementOFList];
+        int firstElementOfList = 0;
+        GameObject currentBird = birds[firstElementOfList];
         currentBird.transform.position = origin.transform.position;
         return currentBird;
     }
