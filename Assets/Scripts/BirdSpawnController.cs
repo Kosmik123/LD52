@@ -27,6 +27,11 @@ public class BirdSpawnController : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
+    private BirdPool CreatePoolForBirdType(Enemy bird)
+    {
+
+    }
+
     private void Update()
     {
         float deltaTime = Time.deltaTime;
