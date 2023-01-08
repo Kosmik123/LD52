@@ -30,6 +30,11 @@ public class BirdSpawnController : MonoBehaviour
     private void Awake()
     {
         birdPools = new BirdPool[birdPrefabs.Length];
+        for (int i = 0; i < birdPrefabs.Length; i++)
+        {
+            var pool = CreatePoolForBirdType(birdPrefabs[i]);
+            birdPools[i] = pool;
+        }
     }
 
     private BirdPool CreatePoolForBirdType(Enemy bird)
