@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BirdPool : MonoBehaviour
 {
+    [SerializeField] private GameObject birdPrefab;
+
     [SerializeField] public List<GameObject> birds;
     [SerializeField] private GameObject origin;
-    [SerializeField] private GameObject bird;
     [SerializeField] private int maxObjects = 5;
 
     private void Start()
@@ -29,7 +30,7 @@ public class BirdPool : MonoBehaviour
 
     private GameObject InstantiateBird()
     {
-        GameObject currentBird = Instantiate(bird, origin.transform.position, Quaternion.identity);
+        GameObject currentBird = Instantiate(birdPrefab, origin.transform.position, Quaternion.identity);
         return currentBird;
     }    
 }
