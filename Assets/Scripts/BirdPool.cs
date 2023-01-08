@@ -13,7 +13,6 @@ public class BirdPool : MonoBehaviour
 
     [SerializeField] public List<Enemy> birds = new List<Enemy>();
     [SerializeField] private GameObject origin;
-    [SerializeField] private int maxObjects = 5;
     
     public Enemy SpawnBird()
     {
