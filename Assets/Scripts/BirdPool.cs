@@ -18,7 +18,7 @@ public class BirdPool : MonoBehaviour
     {
         if(birds.Count > 0)
         {
-            withdrawElementOfList();
+            WithdrawElementOfList();
         }
         else
         {
@@ -26,7 +26,7 @@ public class BirdPool : MonoBehaviour
         }
     }
 
-    private GameObject withdrawElementOfList()
+    private GameObject WithdrawElementOfList()
     {
         int firstElementOFList = 0;
         GameObject currentBird = birds[firstElementOFList];
