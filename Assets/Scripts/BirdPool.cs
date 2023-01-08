@@ -2,64 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdPool : MonoBehaviour
+public partial class BirdPool : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private List<GameObject> pool = new List<GameObject>();
+    [SerializeField] public List<GameObject> birds;
+    [SerializeField] private GameObject origin;
+    [SerializeField] private GameObject bird;
+    [SerializeField] private int maxObjects = 5;
 
-    [SerializeField] private float minRandomSpawnTimeValue;
-    [SerializeField] private float maxRandomSpawnTimeValue;
-
-    [SerializeField] private int poolSize = 5;
-
-    private float spawnTimer;
-    
-    private void Awake()
-    {
-        PopulatePool();
-    }
-    
     private void Start()
     {
-        SpawnBird();
-        StartCoroutine("SpawnBird");
+        birds = new List<GameObject>();
     }
 
-    private void PopulatePool()
+    public void SpawnBirds()
     {
-        foreach(GameObject bird in pool)
+        if(birds.Count > 0)
         {
-            pool.Add(Instantiate(enemy, transform));
-            bird.SetActive(false);
+            withdrawElementOfList();
+        }
+        else
+        {
+            InstantiateBird();
         }
     }
 
-    IEnumerator SpawnBird()
+    private GameObject withdrawElementOfList()
     {
-        while (true)
-        {
-            EnableBirdInPool();
-            SetRandomTimeInterval();
-            yield return new WaitForSeconds(spawnTimer);
-        }
+        int firstElementOFList = 0;
+        GameObject currentBird = birds[firstElementOFList];
+        currentBird.transform.position = origin.transform.position;
+        return currentBird;
     }
 
-    private void EnableBirdInPool()
+    private GameObject InstantiateBird()
     {
-        foreach (GameObject bird in pool)
-        {
-            if (bird.activeInHierarchy)
-            {
-                bird.SetActive(true);
-                return;
-            }
-        }
+        GameObject currentBird = Instantiate(bird, origin.transform.position, Quaternion.identity);
+        currentBird.transform.position = origin.transform.position;
+        return currentBird;
     }    
-
-    private void SetRandomTimeInterval()
-    {
-        spawnTimer = Random.Range(minRandomSpawnTimeValue, maxRandomSpawnTimeValue);
-    }
-
-
 }
