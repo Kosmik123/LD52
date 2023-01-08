@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class BirdSpawnController : MonoBehaviour
 {
+    [Header("To link")]
     [SerializeField] private BirdPool birdPool;
     [SerializeField] private GameObject bird;
 
+    [Header("Waves Time")]
     [SerializeField] private float minRandomSpawnTimeValue;
     [SerializeField] private float maxRandomSpawnTimeValue;
 
     [SerializeField, ReadOnly]
     private float spawnTimer;
 
+    [Header("Difficulty")]
     [SerializeField] private float difficultyModifier = 0.1f;
     [SerializeField, ReadOnly]
     private float difficulty;
