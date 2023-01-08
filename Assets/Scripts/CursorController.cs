@@ -14,8 +14,8 @@ public class CursorController : MonoBehaviour
 
     [Header("States")]
     [SerializeField, ReadOnly]
-    private float angle;
-    public float Angle => angle;
+    private int angle;
+    public int Angle => angle;
 
     public Vector2 Position => new Vector2(transform.position.x, transform.position.z);
 
@@ -27,8 +27,7 @@ public class CursorController : MonoBehaviour
         set
         {
             size = value;
-            spriteRenderer.size = size;
-            snapToTile.TileSize = size;
+            spriteRenderer.size = snapToTile.TileSize = angle % 180 == 0 ? size : new Vector2Int(size.y, size.x);
         }
     }
 
@@ -43,9 +42,7 @@ public class CursorController : MonoBehaviour
             angle += 90;
             angle %= 360;
             container.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-            int oldX = Size.x;
-            int oldY = Size.y;
-            Size = new Vector2Int(oldY, oldX);
+            Size = Size;
         }
     }
 

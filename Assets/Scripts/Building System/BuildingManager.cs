@@ -111,13 +111,8 @@ namespace BuildingSystem
             if (Input.GetKeyDown(KeyCode.Tab))
                 ToggleMode();
 
-
-            float scroll = Input.mouseScrollDelta.y;
-            if (scroll != 0)
-                CurrentBuildingIndex += Mathf.RoundToInt(scroll);
-
-            canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.45f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers);
-           
+            canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f),
+                0.4f * new Vector3(cursor.Size.x, 1, cursor.Size.y), Quaternion.AngleAxis(cursor.Angle, Vector3.up), collidingLayers);
             if (destroyingMode)
                 HandleDestroying();
             else
@@ -152,6 +147,10 @@ namespace BuildingSystem
 
         private void HandleBuilding()
         {
+            float scroll = Input.mouseScrollDelta.y;
+            if (scroll != 0)
+                CurrentBuildingIndex += Mathf.RoundToInt(scroll);
+
             if (canBuild)
             {
                 currentlyHeldBuilding.State = BuildingVisual.BuildState.Valid;
