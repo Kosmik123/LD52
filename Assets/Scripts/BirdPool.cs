@@ -1,4 +1,4 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +11,8 @@ public class BirdPool : MonoBehaviour
         set => birdPrefab = value; 
     }
 
-    [SerializeField] public List<Enemy> birds = new List<Enemy>();
-    [SerializeField] private Transform origin;
+    [SerializeField, ReadOnly] public List<Enemy> birds = new List<Enemy>();
+    [SerializeField, ReadOnly] private Transform origin;
     public Transform Origin 
     { 
         get => origin;

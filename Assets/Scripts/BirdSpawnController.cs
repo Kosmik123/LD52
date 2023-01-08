@@ -1,19 +1,19 @@
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BirdSpawnController : MonoBehaviour
 {
     [Header("To link")]
-    [SerializeField] private BirdPool[] birdPools;
     [SerializeField] private Enemy[] birdPrefabs;
+    [SerializeField, ReadOnly] private BirdPool[] birdPools;
+    
+    [Header("Spawning Settings")]
     [SerializeField] private Transform mapCenter;
-    [SerializeField] private float spawnDistanceFromCenter;
+    [SerializeField] private float spawnDistanceFromCenter = 100;
 
     [Header("Waves Time")]
-    [SerializeField] private float minRandomSpawnTimeValue;
-    [SerializeField] private float maxRandomSpawnTimeValue;
+    [SerializeField] private float minRandomSpawnTimeValue = 15;
+    [SerializeField] private float maxRandomSpawnTimeValue = 25;
 
     [SerializeField, ReadOnly]
     private float spawnTimer;
