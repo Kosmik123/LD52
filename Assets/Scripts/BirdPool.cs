@@ -5,6 +5,11 @@ using UnityEngine;
 public class BirdPool : MonoBehaviour
 {
     [SerializeField] private Enemy birdPrefab;
+    public Enemy BirdPrefab
+    {
+        get => birdPrefab;
+        set => birdPrefab = value; 
+    }
 
     [SerializeField] public List<Enemy> birds = new List<Enemy>();
     [SerializeField] private GameObject origin;
