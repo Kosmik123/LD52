@@ -8,6 +8,7 @@ public class BirdSpawnController : MonoBehaviour
     [Header("To link")]
     [SerializeField] private BirdPool[] birdPools;
     [SerializeField] private Enemy[] birdPrefabs;
+    [SerializeField] private Transform mapCenter;
 
     [Header("Waves Time")]
     [SerializeField] private float minRandomSpawnTimeValue;
@@ -28,6 +29,7 @@ public class BirdSpawnController : MonoBehaviour
         {
             var pool = CreatePoolForBirdType(birdPrefabs[i]);
             birdPools[i] = pool;
+            birdPools[i].Origin = mapCenter;
         }
     }
 
