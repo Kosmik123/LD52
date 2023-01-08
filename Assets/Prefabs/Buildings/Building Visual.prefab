@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7670459302660200942}
   - component: {fileID: 7466564302410505128}
   m_Layer: 0
-  m_Name: Building Base
+  m_Name: Building Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1171371379169002155}
   size: {x: 1, y: 1}
+  state: 0
+  isInited: 0
 --- !u!1 &4020400681906698037
 GameObject:
   m_ObjectHideFlags: 0

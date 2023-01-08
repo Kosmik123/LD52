@@ -14,11 +14,10 @@ namespace BuildingSystem
         private BuildingSettings settings;
 
         [SerializeField]
-        private List<Building> buildings;
-        private readonly Dictionary<Vector2Int, Building> buildingsDictionary = new Dictionary<Vector2Int, Building>();
+        private BuildingVisual[] visualPrefabs;
 
         [SerializeField]
-        private CursorSize cursor;
+        private CursorController cursor;
 
         [SerializeField]
         private Transform buildingsContainer;
@@ -30,7 +29,7 @@ namespace BuildingSystem
 
         [Header("Properties")]
         [SerializeField, ReadOnly]
-        private Building[] templates;
+        private BuildingVisual[] cursorTemplates;
 
         [Header("States")]
         [SerializeField, ReadOnly]
@@ -42,20 +41,24 @@ namespace BuildingSystem
         }
 
         [SerializeField, ReadOnly]
-        private Building currentlyHeldBuilding;
+        private BuildingVisual currentlyHeldBuilding;
+
+        [SerializeField, ReadOnly]
+        private List<Building> buildings;
+        private readonly Dictionary<Vector2, Building> buildingsDictionary = new Dictionary<Vector2, Building>();
+
+        [SerializeField, ReadOnly]
+        private bool canBuild;
 
         private void Awake()
         {
-            templates = buildableBuildingsContainer.GetComponentsInChildren<Building>(true); 
-        }
-
-
-        private void OnEnable()
-        {
-            foreach (var building in templates)
+            cursorTemplates = new BuildingVisual[visualPrefabs.Length];
+            for (int i = 0; i < visualPrefabs.Length; i++)
             {
-                building.Init(settings);
-                building.gameObject.SetActive(false);
+                var template = Instantiate(visualPrefabs[i], buildableBuildingsContainer);
+                cursorTemplates[i] = template;
+                template.Init(settings);
+                template.gameObject.SetActive(false);
             }
         }
 
@@ -64,10 +67,20 @@ namespace BuildingSystem
             CurrentBuildingIndex = 0;
         }
 
-        private Building SpawnBuilding(Building buildingTemplate)
+        private Building SpawnBuilding(BuildingVisual buildingTemplate, float x, float z, float angle)
         {
-            var building = Instantiate(buildingTemplate, buildingTemplate.transform.position, buildingTemplate.transform.rotation, buildingsContainer);
-            building.OnBuildingDestroyed += RemoveFromList;
+            var buildingGO = new GameObject($"{buildingTemplate.gameObject.name} ({x}, {z})");
+            buildingGO.transform.SetPositionAndRotation(new Vector3(x, 0, z), Quaternion.AngleAxis(angle, Vector3.up));
+
+            var buildingVisual = Instantiate(buildingTemplate, buildingGO.transform);
+            buildingVisual.SetMaterialsDict(buildingTemplate.MaterialsByRenderer);
+            buildingVisual.transform.localPosition = Vector3.zero;
+            buildingVisual.transform.localRotation = Quaternion.identity;
+            buildingVisual.State = BuildingVisual.BuildState.Built;
+
+            var building = buildingGO.AddComponent<Building>();
+            building.Init(buildingVisual);
+
             return building;
         }
 
@@ -84,10 +97,10 @@ namespace BuildingSystem
                 currentlyHeldBuilding.transform.parent = buildableBuildingsContainer;
             }
 
-            currentBuildingIndex = (index + templates.Length) % templates.Length;
-            currentlyHeldBuilding = templates[currentBuildingIndex];
+            currentBuildingIndex = (index + cursorTemplates.Length) % cursorTemplates.Length;
+            currentlyHeldBuilding = cursorTemplates[currentBuildingIndex];
             currentlyHeldBuilding.gameObject.SetActive(true);
-            currentlyHeldBuilding.transform.parent = cursor.transform;
+            currentlyHeldBuilding.transform.parent = cursor.Container;
             currentlyHeldBuilding.transform.localPosition = Vector3.zero;
             currentlyHeldBuilding.transform.localRotation = Quaternion.identity;
             cursor.Size = currentlyHeldBuilding.Size;
@@ -95,29 +108,32 @@ namespace BuildingSystem
 
         private void Update()
         {
+            canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.45f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers);
             HandleBuilding();
         }
 
         private void HandleBuilding()
         {
-            if (Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f), 0.5f * new Vector3(cursor.Size.x, 1, cursor.Size.y), cursor.transform.rotation, collidingLayers))
+            if (canBuild)
             {
-                currentlyHeldBuilding.State = Building.BuildState.Blocked;
+                currentlyHeldBuilding.State = BuildingVisual.BuildState.Valid;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Build(visualPrefabs[currentBuildingIndex],
+                        cursor.Position.x, cursor.Position.y, cursor.Angle);
+                }
             }
             else
             {
-                currentlyHeldBuilding.State = Building.BuildState.Valid;
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Build(currentlyHeldBuilding);
-                }
+                currentlyHeldBuilding.State = BuildingVisual.BuildState.Blocked;
             }
         }
 
-        private void Build(Building template)
+        private void Build(BuildingVisual template, float x, float z, float angle)
         {
-            var building = SpawnBuilding(template);
-            building.State = Building.BuildState.Built;
+            var building = SpawnBuilding(template, x, z, angle);
+            building.transform.parent = buildingsContainer;
+            buildings.Add(building);
         }
     }
 }
