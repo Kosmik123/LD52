@@ -55,6 +55,11 @@ public class BirdSpawnController : MonoBehaviour
     private void SpawnWave()
     {
         int enemyPoints = Mathf.RoundToInt(difficulty);
+        while (enemyPoints > 0)
+        {
+            int points = SpawnBird();
+            enemyPoints -= points;
+        }
     }
 
     private int SpawnBird()
