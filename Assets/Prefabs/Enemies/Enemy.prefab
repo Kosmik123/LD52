@@ -53,7 +53,7 @@ MonoBehaviour:
     targetTag: 
     targetName: 
     targetType: {fileID: 0}
-  moveSpeed: 0
+  moveSpeed: 4
 --- !u!143 &2715323301721725270
 CharacterController:
   m_ObjectHideFlags: 0

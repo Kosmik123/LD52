@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Enemy : MonoBehaviour
 {
     [System.Serializable]
-    public class Target
+    public struct Target
     {
         public enum Mode
         {
@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
 
+
     private void Start()
     {
         FindTarget();
@@ -80,7 +81,7 @@ public class Enemy : MonoBehaviour
                 target.Set(((Component)GetRandomFromList(foundComponents)).transform);
                 break;
             default:
-                target = null;        
+                target.Set(null);     
                 break;
         }
     }
@@ -94,6 +95,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 forward = targetPosition - transform.position;
         forward.y = 0;
+        forward.Normalize();
         transform.forward = forward;
 
         controller.Move(distance * forward);
