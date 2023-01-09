@@ -2,13 +2,7 @@ fileFormatVersion: 2
 guid: d140404b15dfa0a45a8db74ab7ee70f6
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: -7000249354413821593
-    second: Pumpkins|Sphere.002Action
-  - first:
-      74: -1225984782920073527
-    second: Pumpkins|Sphere.003Action
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
