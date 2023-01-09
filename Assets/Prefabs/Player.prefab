@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7207060357276315950}
   - component: {fileID: 5573340499310287252}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3652745732381508665}
   - component: {fileID: 6046578624257243661}
   - component: {fileID: 6115874430663606926}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,11 +141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095fdf48bdfc1284e91103ce3cd57c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flat: {fileID: 6697646537019027701}
   characterController: {fileID: 6115874430663606926}
+  inputProvider: {fileID: 6046578624257243661}
   forwardProvider: {fileID: 0}
   moveSpeed: 5
-  inputProvider: {fileID: 6046578624257243661}
+  gravityScale: 0
+  velocity: {x: 0, y: 0, z: 0}
+  collisionFlags: 0
 --- !u!114 &6046578624257243661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +233,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5545894484989162110, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4648655942489204837, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3585141179408262983, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
       propertyPath: m_AABB.m_Center.x
       value: 0
@@ -247,9 +257,33 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.x
       value: 0.006
       objectReference: {fileID: 0}
+    - target: {fileID: -2239048278327012040, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 630996121775954841, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
       propertyPath: m_Name
       value: scarecrow v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033386760430998891, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352770902223437074, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: db1e5d15ac5fce6449dfc2cb4b87e84a, type: 3}
       propertyPath: m_LocalScale.x

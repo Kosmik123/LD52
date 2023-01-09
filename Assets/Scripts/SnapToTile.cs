@@ -27,15 +27,23 @@ public class SnapToTile : MonoBehaviour
         transform.position = GetSnappedPosition(position.x, position.y, position.z);
     }
 
+    public Vector3 GetSnappedPosition(Vector3 position)
+    {
+        return GetSnappedPosition(position.x, position.y, position.z);
+    }
+
     public Vector3 GetSnappedPosition(float x, float y, float z)
     {
+        x /= gridSize.x;
+        z /= gridSize.y;
+
         bool isXEven = tileSize.x % 2 == 0;
         bool isYEven = tileSize.y % 2 == 0;
 
         float newX = isXEven ? Mathf.RoundToInt(x - 0.5f) + 0.5f : Mathf.RoundToInt(x);
         float newZ = isYEven ? Mathf.RoundToInt(z - 0.5f) + 0.5f : Mathf.RoundToInt(z);
 
-        return new Vector3(newX, y, newZ);
+        return new Vector3(gridSize.x * newX, y, gridSize.y * newZ);
     }
 
     private void OnValidate()

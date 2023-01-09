@@ -1,65 +1,48 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BirdPool : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private List<GameObject> pool = new List<GameObject>();
+    [SerializeField] private Enemy birdPrefab;
+    public Enemy BirdPrefab
+    {
+        get => birdPrefab;
+        set => birdPrefab = value; 
+    }
 
-    [SerializeField] private float minRandomSpawnTimeValue;
-    [SerializeField] private float maxRandomSpawnTimeValue;
+    [SerializeField, ReadOnly] public List<Enemy> birds = new List<Enemy>();
+    [SerializeField, ReadOnly] private Transform origin;
+    public Transform Origin 
+    { 
+        get => origin;
+        set => origin = value;
+    }
 
-    [SerializeField] private int poolSize = 5;
+    [SerializeField] private float spawnDistance;
+    public float SpawnDistance { get => spawnDistance; set => spawnDistance = value; }
 
-    private float spawnTimer;
     
-    private void Awake()
+    public Enemy SpawnBird()
     {
-        PopulatePool();
-    }
-    
-    private void Start()
-    {
-        SpawnBird();
-        StartCoroutine("SpawnBird");
+        Enemy enemy = birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
+        enemy.gameObject.SetActive(true);
+        return enemy;
     }
 
-    private void PopulatePool()
+    private Enemy WithdrawElementOfList()
     {
-        foreach(GameObject bird in pool)
-        {
-            pool.Add(Instantiate(enemy, transform));
-            bird.SetActive(false);
-        }
+        int firstElementOfList = 0;
+        Enemy currentBird = birds[firstElementOfList];
+        currentBird.transform.position = origin.transform.position;
+        return currentBird;
     }
 
-    IEnumerator SpawnBird()
+    private Enemy InstantiateBird()
     {
-        while (true)
-        {
-            EnableBirdInPool();
-            SetRandomTimeInterval();
-            yield return new WaitForSeconds(spawnTimer);
-        }
-    }
-
-    private void EnableBirdInPool()
-    {
-        foreach (GameObject bird in pool)
-        {
-            if (bird.activeInHierarchy)
-            {
-                bird.SetActive(true);
-                return;
-            }
-        }
+        float randomAngle = Random.Range(-180, 180);
+        Vector3 randomPosition = Quaternion.AngleAxis(randomAngle, Vector3.up) * Vector3.forward * spawnDistance;
+        Enemy currentBird = Instantiate(birdPrefab, origin.position + randomPosition, Quaternion.identity);
+        return currentBird;
     }    
-
-    private void SetRandomTimeInterval()
-    {
-        spawnTimer = Random.Range(minRandomSpawnTimeValue, maxRandomSpawnTimeValue);
-    }
-
-
 }

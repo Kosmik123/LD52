@@ -21,11 +21,8 @@ public class FlatPosition : MonoBehaviour
 
     public void UpdatePosition()
     {
-        Vector3 rayStart = new Vector3(flatPosition.x, transform.position.y + 0.5f, flatPosition.y);
+        Vector3 rayStart = transform.position + new Vector3(0, 0.5f);
         if (Physics.Raycast(rayStart, Vector3.down, out var hitInfo, 1, groundLayers))
-        {
             transform.position = hitInfo.point;
-        }
-        flatPosition = new Vector2(transform.position.x, transform.position.z);
     }
 }

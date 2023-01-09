@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa93f25fec5335e47b4a98e1cd6b3a78, type: 3}
+  m_Name: Building Settings
+  m_EditorClassIdentifier: Assembly-CSharp:BuildingSystem:BuildingSettings
+  <BlockedMaterial>k__BackingField: {fileID: 2100000, guid: 5ffa8e803be79e84599287d7c295682b, type: 2}
+  <ValidMaterial>k__BackingField: {fileID: 2100000, guid: bb13ac2a30b1fa4479cf6bc3507040d9, type: 2}
