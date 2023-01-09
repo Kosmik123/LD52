@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7139555338408726836}
   - component: {fileID: 668894443450543395}
-  m_Layer: 0
+  - component: {fileID: 2715323301721725270}
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +45,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a828160e46adc488ff970bd576e501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 0
+  controller: {fileID: 2715323301721725270}
+  difficulty: 1
+  target:
+    targetBy: 0
+    targetPosition: {x: 0, y: 0, z: 0}
+    targetTag: 
+    targetName: 
+    targetType: {fileID: 0}
+  moveSpeed: 0
+--- !u!143 &2715323301721725270
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520913653247577920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.3
+  m_SlopeLimit: 0
+  m_StepOffset: 0.1
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5256482476784442167
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760982165557389434}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

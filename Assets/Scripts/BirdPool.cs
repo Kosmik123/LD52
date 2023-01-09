@@ -22,7 +22,6 @@ public class BirdPool : MonoBehaviour
     [SerializeField] private float spawnDistance;
     public float SpawnDistance { get => spawnDistance; set => spawnDistance = value; }
 
-    
     public Enemy SpawnBird()
     {
         Enemy enemy = birds.Count > 0 ? WithdrawElementOfList() : InstantiateBird();
@@ -45,4 +44,12 @@ public class BirdPool : MonoBehaviour
         Enemy currentBird = Instantiate(birdPrefab, origin.position + randomPosition, Quaternion.identity);
         return currentBird;
     }    
+
+    public void ReturnObjectToPool(Enemy enemy)
+    {
+        enemy.transform.parent = transform;
+        birds.Add(enemy);
+        enemy.gameObject.SetActive(false);
+
+    }
 }

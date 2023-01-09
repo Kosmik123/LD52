@@ -8,18 +8,24 @@ namespace BuildingSystem
 {
     public class BuildingManager : MonoBehaviour
     {
-        [Header("Settings")]
-        [SerializeField]
-        private BuildingSettings settings;
-        [SerializeField]
-        private BuildingVisual[] visualPrefabs;
+        [Header("To Link")]
         [SerializeField]
         private CursorController cursor;
+        [SerializeField]
+        private Animator playerAnimator;
 
         [SerializeField]
         private Transform buildingsContainer;
         [SerializeField]
         private Transform buildableBuildingsContainer;
+
+        [Header("Settings")]
+        [SerializeField]
+        private BuildingSettings settings;
+        [SerializeField]
+        private BuildingVisual[] visualPrefabs;
+
+
 
         [SerializeField]
         private LayerMask collidingLayers;
@@ -48,7 +54,7 @@ namespace BuildingSystem
         private bool canBuild;
 
         [SerializeField, ReadOnly]
-        private bool destroyingMode;
+        private InteractionMode mode;
 
         private void Awake()
         {
@@ -64,6 +70,7 @@ namespace BuildingSystem
 
         private void Start()
         {
+            mode = InteractionMode.Build;
             CurrentBuildingIndex = 0;
         }
 
@@ -113,18 +120,18 @@ namespace BuildingSystem
 
             canBuild = !Physics.CheckBox(cursor.transform.position + new Vector3(0, 0.5f),
                 0.4f * new Vector3(cursor.Size.x, 1, cursor.Size.y), Quaternion.AngleAxis(cursor.Angle, Vector3.up), collidingLayers);
-            if (destroyingMode)
+            if (mode == InteractionMode.Destroy)
                 HandleDestroying();
-            else
+            else if (mode == InteractionMode.Build)
                 HandleBuilding();
         }
 
         private void ToggleMode()
         {
-            destroyingMode = !destroyingMode;
-            cursor.SetColor(destroyingMode ? Color.red : Color.white);
+            mode = (mode == InteractionMode.Build) ? InteractionMode.Destroy : InteractionMode.Build;
+            cursor.SetMode(mode);
             for (int i = 0; i < cursorTemplates.Length; i++)
-                cursorTemplates[i].gameObject.SetActive(destroyingMode == false && currentBuildingIndex == i);
+                cursorTemplates[i].gameObject.SetActive(mode == InteractionMode.Build && currentBuildingIndex == i);
         }
 
         private void HandleDestroying()
@@ -156,6 +163,7 @@ namespace BuildingSystem
                 currentlyHeldBuilding.State = BuildingVisual.BuildState.Valid;
                 if (Input.GetMouseButtonDown(0))
                 {
+                    //playerAnimator.SetTrigger("Action");
                     Build(visualPrefabs[currentBuildingIndex],
                         cursor.Position.x, cursor.Position.y, cursor.Angle);
                 }

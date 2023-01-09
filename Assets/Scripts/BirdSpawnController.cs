@@ -10,6 +10,7 @@ public class BirdSpawnController : MonoBehaviour
     [Header("Spawning Settings")]
     [SerializeField] private Transform mapCenter;
     [SerializeField] private float spawnDistanceFromCenter = 100;
+    [SerializeField] private Transform enemiesContainer;
 
     [Header("Waves Time")]
     [SerializeField] private float minRandomSpawnTimeValue = 15;
@@ -39,6 +40,7 @@ public class BirdSpawnController : MonoBehaviour
     {
         var poolGO = new GameObject($"Pool {bird.gameObject.name}");
         var pool = poolGO.AddComponent<BirdPool>();
+        pool.transform.parent = transform;
         pool.BirdPrefab = bird;
         return pool;
     }
@@ -71,7 +73,8 @@ public class BirdSpawnController : MonoBehaviour
         int randomPoolIndex = Random.Range(0, birdPools.Length);
         var pool = birdPools[randomPoolIndex];
         var bird = pool.SpawnBird();
-        return bird.Difficulty;
+        bird.transform.parent = enemiesContainer;
+        return Mathf.Max(bird.Difficulty, 1);
     }
 
     private float GetRandomTimeInterval()

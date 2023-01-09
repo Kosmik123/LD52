@@ -2,9 +2,19 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum InteractionMode
+{
+    None = 0,
+    Build = 1,
+    Destroy = 2,
+}
+
 
 public class CursorController : MonoBehaviour
 {
+    [SerializeField]
+    private CursorSettings settings;
+
     [Header("To Link")]
     [SerializeField]
     private SpriteRenderer spriteRenderer;
@@ -51,8 +61,24 @@ public class CursorController : MonoBehaviour
         Size = Size;
     }
 
-    public void SetColor(Color color)
+    public void SetMode(InteractionMode mode)
     {
-        spriteRenderer.color = color;
+        Texture2D icon = settings.DefaultCursorIcon;
+        switch (mode)
+        {
+            case InteractionMode.Build:
+                spriteRenderer.color = Color.white;
+                icon = settings.BuildCursorIcon;
+                break;
+            case InteractionMode.Destroy:
+                spriteRenderer.color = Color.red;
+                icon = settings.DestroyCursorIcon;
+                break;
+            default:
+                spriteRenderer.color = Color.clear;
+                break;
+        }
+        //Cursor.SetCursor(icon, Vector2.zero, CursorMode.Auto);
+
     }
 }

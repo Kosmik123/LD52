@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1c58f84cf37f74591dc0b51eb53079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 996349a11f67aaa4f94007eb4c926013, type: 2}
   spriteRenderer: {fileID: 7398471722083240883}
   snapToTile: {fileID: 7398471722338354358}
   angle: 0
