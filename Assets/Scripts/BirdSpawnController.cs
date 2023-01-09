@@ -6,7 +6,8 @@ public class BirdSpawnController : MonoBehaviour
     [Header("To link")]
     [SerializeField] private Enemy[] birdPrefabs;
     [SerializeField, ReadOnly] private BirdPool[] birdPools;
-    
+    [SerializeField] private EnemiesManager enemiesManager;
+
     [Header("Spawning Settings")]
     [SerializeField] private Transform mapCenter;
     [SerializeField] private float spawnDistanceFromCenter = 100;
@@ -73,6 +74,7 @@ public class BirdSpawnController : MonoBehaviour
         int randomPoolIndex = Random.Range(0, birdPools.Length);
         var pool = birdPools[randomPoolIndex];
         var bird = pool.SpawnBird();
+        enemiesManager.AddEnemy(bird);
         bird.transform.parent = enemiesContainer;
         return Mathf.Max(bird.Difficulty, 1);
     }

@@ -86,9 +86,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void DoUpdate(float deltaTime)
     {
-        MoveTo(target.Position, moveSpeed * Time.deltaTime);
+        MoveTo(target.Position, moveSpeed * deltaTime);
     }
 
     private void MoveTo(Vector3 targetPosition, float distance)
