@@ -48,6 +48,9 @@ public class BirdSpawnController : MonoBehaviour
 
     private void Update()
     {
+        if (enemiesManager.IsMaxReached())
+            return;
+
         float deltaTime = Time.deltaTime;
         difficulty += deltaTime * difficultyModifier;
 
