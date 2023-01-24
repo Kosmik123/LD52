@@ -960,6 +960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheat
       objectReference: {fileID: 0}
+    - target: {fileID: 1239349134248615263, guid: c420719b3ab7f814692595b79e505c45, type: 3}
+      propertyPath: m_TagString
+      value: Grain
+      objectReference: {fileID: 0}
     - target: {fileID: 4020400681906698037, guid: c420719b3ab7f814692595b79e505c45, type: 3}
       propertyPath: m_Layer
       value: 10

@@ -132,6 +132,14 @@ PrefabInstance:
       propertyPath: targetTag
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 668894443450543395, guid: cb5aed5e6c290b844898c19ed9fa3f46, type: 3}
+      propertyPath: target.targetBy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 668894443450543395, guid: cb5aed5e6c290b844898c19ed9fa3f46, type: 3}
+      propertyPath: target.targetTag
+      value: Grain
+      objectReference: {fileID: 0}
     - target: {fileID: 2520913653247577920, guid: cb5aed5e6c290b844898c19ed9fa3f46, type: 3}
       propertyPath: m_Name
       value: Crow
